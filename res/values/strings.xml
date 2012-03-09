@@ -3,5 +3,12 @@
 
     <string name="hello">Hello World, QuoteListActivity!</string>
     <string name="app_name">Geek Quote</string>
+    <string-array name="quotes">
+        <item>Today, I was given a bottle of vitamins that are supposed to help your memory. I forgot them at home. FML</item>
+        <item>Today, I thought it would be funny to scare my dad for once, since he has scared me for fun dozens of times. It would have been funny, had he not punched me in the face. FML</item>
+        <item>Today, I was walking to the bus in my favorite jeans, and I felt a uncontrollable itch in my leg. I scratched and it went away, but then I felt something moving on my leg. I hadn\'t worn my jeans in so long that a spider had decided to make it a nest. FML</item>
+        <item>Today, I was at my girlfriend\'s house for the first time. I cracked a joke that offended her, so she gave me the silent treatment. I had to pee, and since she wouldn\'t tell me where the bathroom was, I went to look for it. I walked in on her parents making love. FML</item>
+        <item>Today, while on trial for a desperately needed new job, I tripped crossing a road with my would-be manager. I twisted my ankle, and he had to carry me across the road and call a taxi for me to go home. FML</item>
+    </string-array>
 
 </resources>
