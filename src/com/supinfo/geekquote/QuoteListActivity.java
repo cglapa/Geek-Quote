@@ -8,12 +8,17 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class QuoteListActivity extends Activity {
+public class QuoteListActivity extends Activity implements View.OnClickListener {
 	private ArrayList<Quote> quotesArray = new ArrayList<Quote>();
 	private LinearLayout quotesView;
+	private EditText quoteField;
+	private Button quoteButton;
 	private boolean isEven = false;
 	
     /** Called when the activity is first created. */
@@ -22,7 +27,11 @@ public class QuoteListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        quoteButton = (Button) findViewById(R.id.quotebutton);
+        quoteField = (EditText) findViewById(R.id.quotefield);
         quotesView = (LinearLayout) findViewById(R.id.quotesview);
+        
+        quoteButton.setOnClickListener(this);
         
         Resources res = getResources();
         String quotes[] = res.getStringArray(R.array.quotes);
@@ -46,4 +55,9 @@ public class QuoteListActivity extends Activity {
     	
     	quotesView.addView(quoteView);
     }
+
+	public void onClick(View v) {
+		addQuote(quoteField.getText().toString());
+		quoteField.setText("");
+	}
 }
