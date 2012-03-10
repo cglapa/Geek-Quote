@@ -6,6 +6,7 @@ import com.supinfo.geekquote.model.Quote;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 public class QuoteListActivity extends Activity {
 	private ArrayList<Quote> quotesArray = new ArrayList<Quote>();
 	private LinearLayout quotesView;
+	private boolean isEven = false;
 	
     /** Called when the activity is first created. */
     @Override
@@ -37,6 +39,10 @@ public class QuoteListActivity extends Activity {
     	
     	TextView quoteView = new TextView(QuoteListActivity.this);
     	quoteView.setText(quote.getStrQuote());
+    	
+    	if(isEven)
+    		quoteView.setBackgroundColor(Color.DKGRAY);
+    	isEven = !isEven;
     	
     	quotesView.addView(quoteView);
     }
