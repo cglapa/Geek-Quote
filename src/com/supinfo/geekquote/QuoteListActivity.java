@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.supinfo.geekquote.model.Quote;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 public class QuoteListActivity extends Activity {
@@ -15,6 +16,12 @@ public class QuoteListActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        Resources res = getResources();
+        String quotes[] = res.getStringArray(R.array.quotes);
+        for(String quote : quotes) {
+        	addQuote(quote);
+        }
     }
     
     public void addQuote(String strQuote) {
