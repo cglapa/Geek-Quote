@@ -2,6 +2,7 @@ package com.supinfo.geekquote;
 
 import java.util.ArrayList;
 
+import com.supinfo.geekquote.adapter.QuoteListAdapter;
 import com.supinfo.geekquote.model.Quote;
 
 import android.app.Activity;
@@ -10,7 +11,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,7 +30,7 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
         quoteField = (EditText) findViewById(R.id.quotefield);
         ListView quotesView = (ListView) findViewById(R.id.quotesview);
         
-        ArrayAdapter<Quote> quotesAdapter = new ArrayAdapter<Quote>(QuoteListActivity.this, android.R.layout.simple_list_item_1, quotesArray);
+        QuoteListAdapter quotesAdapter = new QuoteListAdapter(quotesArray,this);
         quotesView.setAdapter(quotesAdapter);
         
         quoteButton.setOnClickListener(this);
