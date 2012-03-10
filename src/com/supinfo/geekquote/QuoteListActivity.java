@@ -7,6 +7,8 @@ import com.supinfo.geekquote.model.Quote;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class QuoteListActivity extends Activity {
 	private ArrayList<Quote> quotesArray = new ArrayList<Quote>();
@@ -21,6 +23,14 @@ public class QuoteListActivity extends Activity {
         String quotes[] = res.getStringArray(R.array.quotes);
         for(String quote : quotes) {
         	addQuote(quote);
+        }
+        
+        LinearLayout quotesView = (LinearLayout) findViewById(R.id.quotesview);
+        for(Quote quote : quotesArray) {
+        	TextView quoteView = new TextView(QuoteListActivity.this);
+        	quoteView.setText(quote.getStrQuote());
+        	
+        	quotesView.addView(quoteView);
         }
     }
     
