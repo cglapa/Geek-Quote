@@ -8,13 +8,15 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class QuoteListActivity extends Activity implements View.OnClickListener {
+public class QuoteListActivity extends Activity implements View.OnClickListener, TextWatcher {
 	private ArrayList<Quote> quotesArray = new ArrayList<Quote>();
 	private LinearLayout quotesView;
 	private EditText quoteField;
@@ -32,6 +34,7 @@ public class QuoteListActivity extends Activity implements View.OnClickListener 
         quotesView = (LinearLayout) findViewById(R.id.quotesview);
         
         quoteButton.setOnClickListener(this);
+        quoteField.addTextChangedListener(this);
         
         Resources res = getResources();
         String quotes[] = res.getStringArray(R.array.quotes);
@@ -59,5 +62,14 @@ public class QuoteListActivity extends Activity implements View.OnClickListener 
 	public void onClick(View v) {
 		addQuote(quoteField.getText().toString());
 		quoteField.setText("");
+	}
+
+	public void afterTextChanged(Editable s) {}
+
+	public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		boolean clickable = !("".equals(quoteField.getText().toString()));
+		quoteButton.setEnabled(clickable);
 	}
 }
