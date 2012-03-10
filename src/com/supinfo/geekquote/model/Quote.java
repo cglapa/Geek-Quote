@@ -24,5 +24,9 @@ public class Quote {
 	}
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	@Override
+	public String toString() {
+		return strQuote;
 	} 
 }

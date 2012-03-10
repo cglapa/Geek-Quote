@@ -6,22 +6,19 @@ import com.supinfo.geekquote.model.Quote;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
 public class QuoteListActivity extends Activity implements View.OnClickListener, TextWatcher {
 	private ArrayList<Quote> quotesArray = new ArrayList<Quote>();
-	private LinearLayout quotesView;
 	private EditText quoteField;
 	private Button quoteButton;
-	private boolean isEven = false;
 	
     /** Called when the activity is first created. */
     @Override
@@ -31,7 +28,10 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
         
         quoteButton = (Button) findViewById(R.id.quotebutton);
         quoteField = (EditText) findViewById(R.id.quotefield);
-        quotesView = (LinearLayout) findViewById(R.id.quotesview);
+        ListView quotesView = (ListView) findViewById(R.id.quotesview);
+        
+        ArrayAdapter<Quote> quotesAdapter = new ArrayAdapter<Quote>(QuoteListActivity.this, android.R.layout.simple_list_item_1, quotesArray);
+        quotesView.setAdapter(quotesAdapter);
         
         quoteButton.setOnClickListener(this);
         quoteField.addTextChangedListener(this);
@@ -48,15 +48,6 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
     	quote.setStrQuote(strQuote);
     	
     	quotesArray.add(quote);
-    	
-    	TextView quoteView = new TextView(QuoteListActivity.this);
-    	quoteView.setText(quote.getStrQuote());
-    	
-    	if(isEven)
-    		quoteView.setBackgroundColor(Color.DKGRAY);
-    	isEven = !isEven;
-    	
-    	quotesView.addView(quoteView);
     }
 
 	public void onClick(View v) {
