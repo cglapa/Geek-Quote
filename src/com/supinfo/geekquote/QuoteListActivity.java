@@ -1,6 +1,7 @@
 package com.supinfo.geekquote;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.supinfo.geekquote.adapter.QuoteListAdapter;
 import com.supinfo.geekquote.listener.QuoteListTextviewListener;
@@ -48,6 +49,7 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
     public void addQuote(String strQuote) {
     	Quote quote = new Quote();
     	quote.setStrQuote(strQuote);
+    	quote.setCreationDate(Calendar.getInstance().getTime());
     	
     	quotesArray.add(quote);
     }
