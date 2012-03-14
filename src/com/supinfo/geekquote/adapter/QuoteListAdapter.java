@@ -13,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class QuoteListAdapter extends BaseAdapter {
-	private boolean isEven = false;
 	private List<Quote> quotes;
 	private Context context;
 	
@@ -43,9 +42,8 @@ public class QuoteListAdapter extends BaseAdapter {
         text.setText(item.getStrQuote());
         text.setOnClickListener(listener);
         
-        if(isEven)
+        if(position % 2 == 0)
         	text.setBackgroundColor(Color.DKGRAY);
-        isEven = !isEven;
 
         return text;
 	}
