@@ -38,7 +38,7 @@ public class QuoteListAdapter extends BaseAdapter {
 		TextView text = new TextView(context);
 		Quote item = getItem(position);
 		
-		QuoteListTextviewListener listener = new QuoteListTextviewListener(item);
+		QuoteListTextviewListener listener = new QuoteListTextviewListener(position, item);
 		
         text.setText(item.getStrQuote());
         text.setOnClickListener(listener);

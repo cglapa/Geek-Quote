@@ -1,6 +1,7 @@
 package com.supinfo.geekquote.listener;
 
 import com.supinfo.geekquote.QuoteActivity;
+import com.supinfo.geekquote.QuoteListActivity;
 import com.supinfo.geekquote.model.Quote;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class QuoteListTextviewListener implements OnClickListener {
+	private int id;
 	private static Activity activity;
 	private Quote quote;
 	
@@ -16,14 +18,16 @@ public class QuoteListTextviewListener implements OnClickListener {
 		activity = a;
 	}
 	
-	public QuoteListTextviewListener(Quote q) {
+	public QuoteListTextviewListener(int id, Quote q) {
+		this.id = id;
 		quote = q;
 	}
 
 	public void onClick(View v) {
 		Intent intent = new Intent(activity, QuoteActivity.class);
+		intent.putExtra("id", id);
 		intent.putExtra("quote", quote);
-		activity.startActivity(intent);
+		activity.startActivityForResult(intent, QuoteListActivity.QUOTE_ACTIVITY_CODE);
 	}
 
 }
