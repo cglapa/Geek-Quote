@@ -1,8 +1,13 @@
 package com.supinfo.geekquote.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Quote {
+public class Quote implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8417515498929205131L;
 	private String strQuote;
 	private int rating;
 	private Date creationDate;
