@@ -2,6 +2,7 @@ package com.supinfo.geekquote.adapter;
 
 import java.util.List;
 
+import com.supinfo.geekquote.listener.QuoteListTextviewListener;
 import com.supinfo.geekquote.model.Quote;
 
 import android.content.Context;
@@ -35,9 +36,12 @@ public class QuoteListAdapter extends BaseAdapter {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView text = new TextView(context);
-
-        Quote item = getItem(position);
+		Quote item = getItem(position);
+		
+		QuoteListTextviewListener listener = new QuoteListTextviewListener();
+		
         text.setText(item.getStrQuote());
+        text.setOnClickListener(listener);
         
         if(isEven)
         	text.setBackgroundColor(Color.DKGRAY);
