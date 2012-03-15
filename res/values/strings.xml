@@ -4,6 +4,7 @@
     <string name="app_name">Geek Quote</string>
     <string name="quotefield">Type your quote here.</string>
     <string name="quotebutton">Add Quote</string>
+    <string name="editquote">Edit Quote</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string-array name="quotes">
