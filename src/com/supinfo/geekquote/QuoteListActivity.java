@@ -76,6 +76,7 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 	public void onClick(View v) {
 		addQuote(quoteField.getText().toString());
 		quoteField.setText("");
+		quotesAdapter.notifyDataSetChanged();
 	}
 
 	public void afterTextChanged(Editable s) {}
