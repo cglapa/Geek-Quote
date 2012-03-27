@@ -8,10 +8,18 @@ public class Quote implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8417515498929205131L;
+	private long id = 0;
 	private String strQuote;
 	private int rating;
 	private Date creationDate;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		if(this.id == 0)
+			this.id = id;
+	}
 	public String getStrQuote() {
 		return strQuote;
 	}
