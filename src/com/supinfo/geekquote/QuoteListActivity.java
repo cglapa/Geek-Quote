@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.supinfo.geekquote.adapter.QuoteListAdapter;
+import com.supinfo.geekquote.helper.QuoteSqliteHelper;
 import com.supinfo.geekquote.listener.QuoteListTextviewListener;
 import com.supinfo.geekquote.model.Quote;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +28,7 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 	private EditText quoteField;
 	private Button quoteButton;
 	private QuoteListAdapter quotesAdapter;
+	private QuoteSqliteHelper sql;
 	
     /** Called when the activity is first created. */
     @Override
@@ -43,14 +47,36 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
         quoteButton.setOnClickListener(this);
         quoteField.addTextChangedListener(this);
         
-        Resources res = getResources();
-        String quotes[] = res.getStringArray(R.array.quotes);
-        for(String quote : quotes) {
-        	addQuote(quote);
+        sql = new QuoteSqliteHelper(QuoteListActivity.this);
+        SQLiteDatabase db = sql.getWritableDatabase();
+        Cursor results = db.query(QuoteSqliteHelper.TABLE_NAME, null, null, null, null, null, "id");
+        
+        if(results.getCount() > 0) {
+        	Quote q;
+        	results.moveToFirst();
+        	while(!results.isAfterLast()) {
+        		q = sql.formatQuoteFromDbResult(results);
+        		quotesArray.add(q);
+        		results.moveToNext();
+        	}
+        	results.close();
+        } else {
+	        Resources res = getResources();
+	        String quotes[] = res.getStringArray(R.array.quotes);
+	        for(String quote : quotes) {
+	        	addQuote(quote, db);
+	        }
         }
+        db.close();
     }
-    
-    @Override
+
+	@Override
+	protected void onStop() {
+		sql.close();
+		super.onStop();
+	}
+
+	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
@@ -58,23 +84,29 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 		case QUOTE_ACTIVITY_CODE:
 				if(resultCode == RESULT_OK) {
 						Bundle b = data.getExtras();
-						quotesArray.set(b.getInt("id"), (Quote) b.getSerializable("quote"));
+						Quote q = (Quote) b.getSerializable("quote");
+						quotesArray.set(b.getInt("id"), q);
 						quotesAdapter.notifyDataSetChanged();
+						sql.updateQuote(q);
 				}
 				break;
 		}	
     }
     
-    public void addQuote(String strQuote) {
+    public void addQuote(String strQuote, SQLiteDatabase db) {
     	Quote quote = new Quote();
     	quote.setStrQuote(strQuote);
     	quote.setCreationDate(Calendar.getInstance().getTime());
+    	
+		quote.setId(sql.insertQuote(quote, db));
     	
     	quotesArray.add(quote);
     }
 
 	public void onClick(View v) {
-		addQuote(quoteField.getText().toString());
+		SQLiteDatabase db = sql.getWritableDatabase();
+		addQuote(quoteField.getText().toString(), db);
+		db.close();
 		quoteField.setText("");
 		quotesAdapter.notifyDataSetChanged();
 	}
