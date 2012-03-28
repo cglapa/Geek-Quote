@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,7 +75,7 @@ public class QuoteActivity extends Activity implements OnRatingBarChangeListener
 		Resources res = getResources();
 		
 		editQuote = new EditText(this);
-		editQuote.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+		editQuote.setSingleLine(false);
 		editQuote.setText(quote.getStrQuote());
 		
 		AlertDialog dialog = new AlertDialog.Builder(this).create();
