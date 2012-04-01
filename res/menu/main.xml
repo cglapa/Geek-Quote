@@ -10,4 +10,9 @@
         android:title="@string/preferences"
         android:icon="@android:drawable/ic_menu_preferences"
         android:showAsAction="ifRoom" />
+    <item 
+        android:id="@+id/quit_button"
+        android:title="@string/quit"
+        android:showAsAction="never" />
+        
 </menu>

@@ -64,6 +64,9 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 		case R.id.prefs_button:
 			Intent intent = new Intent(this, QuoteRestPreferencesActivity.class);
 			startActivity(intent);
+			break;
+		case R.id.quit_button:
+			finish();
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -10,6 +10,7 @@
     
     <string name="refresh">Refresh</string>
     <string name="preferences">Preferences</string>
+    <string name="quit">Quit</string>
     
     <string name="prefs_use_rest">Activate REST server</string>
     <string name="prefs_rest_uri">REST server URI</string>
