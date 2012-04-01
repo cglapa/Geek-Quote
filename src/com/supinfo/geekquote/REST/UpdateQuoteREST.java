@@ -24,10 +24,12 @@ public class UpdateQuoteREST implements Runnable {
 	private Quote quote;
 	private JSONObject generatedJSON;
 	private Toast toast;
+	private RESTPreferences preferences;
 	
-	public UpdateQuoteREST(Quote quote, Toast toast) {
+	public UpdateQuoteREST(Quote quote, Toast toast, RESTPreferences preferences) {
 		this.quote = quote;
 		this.toast = toast;
+		this.preferences = preferences;
 	}
 
 	public void run() {
@@ -70,8 +72,7 @@ public class UpdateQuoteREST implements Runnable {
 		HttpClient httpClient = new DefaultHttpClient(basicHttpParams);
 		
 		HttpPut httpPut = new HttpPut();
-		// TODO Define RESTURI inside User Interface
-		URI uri = new URI(RESTPreferences.RESTURI+"quote/");
+		URI uri = new URI(preferences.getRestURI()+"quote/");
 		httpPut.setURI(uri);
 		httpPut.setEntity(new StringEntity(generatedJSON.toString()));
 		httpPut.setHeader("Content-Type", "application/json");

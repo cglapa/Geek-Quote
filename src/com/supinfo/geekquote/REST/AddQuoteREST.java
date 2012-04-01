@@ -29,11 +29,13 @@ public class AddQuoteREST implements Runnable {
 	private JSONObject generatedJSON;
 	private String serverResponse;
 	private Toast toast;
+	private RESTPreferences preferences;
 	
-	public AddQuoteREST(Quote quote, QuoteSqliteHelper sql, Toast toast) {
+	public AddQuoteREST(Quote quote, QuoteSqliteHelper sql, Toast toast, RESTPreferences preferences) {
 		this.quote = quote;
 		this.sql = sql;
 		this.toast = toast;
+		this.preferences = preferences;
 	}
 
 	public void run() {
@@ -77,8 +79,7 @@ public class AddQuoteREST implements Runnable {
 		HttpClient httpClient = new DefaultHttpClient(basicHttpParams);
 		
 		HttpPost httpPost = new HttpPost();
-		// TODO Define RESTURI inside User Interface
-		URI uri = new URI(RESTPreferences.RESTURI+"quote/");
+		URI uri = new URI(preferences.getRestURI()+"quote/");
 		httpPost.setURI(uri);
 		httpPost.setEntity(new StringEntity(generatedJSON.toString()));
 		httpPost.setHeader("Content-Type", "application/json");

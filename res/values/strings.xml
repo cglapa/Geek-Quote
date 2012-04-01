@@ -7,7 +7,13 @@
     <string name="editquote">Edit Quote</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    
     <string name="refresh">Refresh</string>
+    <string name="preferences">Preferences</string>
+    
+    <string name="prefs_use_rest">Activate REST server</string>
+    <string name="prefs_rest_uri">REST server URI</string>
+    
     <string name="add_quote_finished">Quote sent to the server</string>
 	<string name="update_quote_finished">Quote updated on the server</string>
     <string name="refresh_quote_finished">Refresh successfull</string>
@@ -15,6 +21,7 @@
     <string name="refresh_quote_error_connrefused">Cannot connect to host</string>
     <string name="refresh_quote_error_json">Error during JSON parsing</string>
     <string name="refresh_quote_error_unknown">Unknown exception raised</string>
+    
     <string-array name="quotes">
         <item>Today, I was given a bottle of vitamins that are supposed to help your memory. I forgot them at home. FML</item>
         <item>Today, I thought it would be funny to scare my dad for once, since he has scared me for fun dozens of times. It would have been funny, had he not punched me in the face. FML</item>

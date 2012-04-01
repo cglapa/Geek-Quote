@@ -11,6 +11,7 @@ import com.supinfo.geekquote.handler.RefreshQuoteHandler;
 import com.supinfo.geekquote.helper.QuoteSqliteHelper;
 import com.supinfo.geekquote.listener.QuoteListTextviewListener;
 import com.supinfo.geekquote.model.Quote;
+import com.supinfo.geekquote.preferences.RESTPreferences;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -49,10 +50,16 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 		case R.id.refresh_button:
+			// TODO Refuse refresh if REST is deactivated
 			RefreshQuoteHandler handler = new RefreshQuoteHandler(this, quotesAdapter);
-			RefreshQuoteREST rq = new RefreshQuoteREST(handler, sql, quotesArray);
+			RESTPreferences preferences = new RESTPreferences(getBaseContext());
+			RefreshQuoteREST rq = new RefreshQuoteREST(handler, sql, quotesArray, preferences);
 			Thread t = new Thread(rq);
 			t.start();
+			break;
+		case R.id.prefs_button:
+			Intent intent = new Intent(this, QuoteRestPreferencesActivity.class);
+			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -116,8 +123,10 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 						quotesAdapter.notifyDataSetChanged();
 						sql.updateQuote(q);
 						
+						// TODO Don't send quote to server if REST is deactivated
 						Toast toast = Toast.makeText(this, "", 1000);
-						UpdateQuoteREST uqr = new UpdateQuoteREST(q, toast);
+						RESTPreferences preferences = new RESTPreferences(getBaseContext());
+						UpdateQuoteREST uqr = new UpdateQuoteREST(q, toast, preferences);
 						Thread t = new Thread(uqr);
 						t.start();
 				}
@@ -134,8 +143,10 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
     	
     	quotesArray.add(quote);
     	
+    	// TODO Don't send quote to server if REST is deactivated
     	Toast toast = Toast.makeText(this, "", 1000);
-    	AddQuoteREST aqr = new AddQuoteREST(quote, sql, toast);
+    	RESTPreferences preferences = new RESTPreferences(getBaseContext());
+    	AddQuoteREST aqr = new AddQuoteREST(quote, sql, toast, preferences);
     	Thread t = new Thread(aqr);
     	t.start();
     }

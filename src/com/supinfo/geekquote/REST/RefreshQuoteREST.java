@@ -33,11 +33,13 @@ public class RefreshQuoteREST implements Runnable {
 	private ArrayList<Quote> quotesArray = new ArrayList<Quote>();
 	private RefreshQuoteHandler handler;
 	private QuoteSqliteHelper sql;
+	private RESTPreferences preferences;
 	
-	public RefreshQuoteREST(RefreshQuoteHandler handler, QuoteSqliteHelper sql, ArrayList<Quote> quotesArray) {
+	public RefreshQuoteREST(RefreshQuoteHandler handler, QuoteSqliteHelper sql, ArrayList<Quote> quotesArray, RESTPreferences preferences) {
 		this.handler = handler;
 		this.sql = sql;
 		this.quotesArray = quotesArray;
+		this.preferences = preferences;
 	}
 	
 	public void run() {
@@ -77,8 +79,7 @@ public class RefreshQuoteREST implements Runnable {
 		HttpClient httpClient = new DefaultHttpClient(basicHttpParams);
 		
 		HttpGet httpGet = new HttpGet();
-		// TODO Define RESTURI inside User Interface
-		URI uri = new URI(RESTPreferences.RESTURI);
+		URI uri = new URI(preferences.getRestURI());
 		httpGet.setURI(uri);
 		
 		HttpResponse response = httpClient.execute(httpGet);
