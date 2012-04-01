@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import com.supinfo.geekquote.REST.AddQuoteREST;
 import com.supinfo.geekquote.REST.RefreshQuoteREST;
+import com.supinfo.geekquote.REST.UpdateQuoteREST;
 import com.supinfo.geekquote.adapter.QuoteListAdapter;
 import com.supinfo.geekquote.handler.RefreshQuoteHandler;
 import com.supinfo.geekquote.helper.QuoteSqliteHelper;
@@ -114,6 +115,11 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 						quotesArray.set(b.getInt("id"), q);
 						quotesAdapter.notifyDataSetChanged();
 						sql.updateQuote(q);
+						
+						Toast toast = Toast.makeText(this, "", 1000);
+						UpdateQuoteREST uqr = new UpdateQuoteREST(q, toast);
+						Thread t = new Thread(uqr);
+						t.start();
 				}
 				break;
 		}	
