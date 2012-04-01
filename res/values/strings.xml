@@ -21,6 +21,7 @@
     <string name="refresh_quote_error_connrefused">Cannot connect to host</string>
     <string name="refresh_quote_error_json">Error during JSON parsing</string>
     <string name="refresh_quote_error_unknown">Unknown exception raised</string>
+    <string name="refresh_quote_refused">REST is deactivated</string>
     
     <string-array name="quotes">
         <item>Today, I was given a bottle of vitamins that are supposed to help your memory. I forgot them at home. FML</item>
