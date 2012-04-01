@@ -1,19 +1,23 @@
 package com.supinfo.geekquote;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
+import android.view.MenuItem;
 
-public class QuoteRestPreferencesActivity extends PreferenceActivity implements  OnPreferenceChangeListener {
+public class QuoteRestPreferencesActivity extends PreferenceActivity implements OnPreferenceChangeListener {
 	private EditTextPreference RESTURI;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.restpreferences);
+		ActionBar actionbar = getActionBar();
+		actionbar.setDisplayHomeAsUpEnabled(true);
 		
 		CheckBoxPreference RESTActivated = (CheckBoxPreference) findPreference("rest_activated");
 		RESTURI = (EditTextPreference) findPreference("rest_uri");
@@ -41,4 +45,11 @@ public class QuoteRestPreferencesActivity extends PreferenceActivity implements 
 		return true;
 	}
 
+	public boolean onOptionsItemSelected (MenuItem item) {
+		switch(item.getItemId()) {
+		case android.R.id.home:
+			finish();
+		}
+		return true;
+	}
 }

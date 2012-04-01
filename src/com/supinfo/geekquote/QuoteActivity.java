@@ -2,12 +2,14 @@ package com.supinfo.geekquote;
 
 import com.supinfo.geekquote.model.Quote;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -26,6 +28,8 @@ public class QuoteActivity extends Activity implements OnRatingBarChangeListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quoteactivity);
+		ActionBar actionbar = getActionBar();
+		actionbar.setDisplayHomeAsUpEnabled(true);
 		
 		Bundle extras = getIntent().getExtras();
 		quote = (Quote) extras.getSerializable("quote");
@@ -45,6 +49,16 @@ public class QuoteActivity extends Activity implements OnRatingBarChangeListener
 		quoteNote.setOnRatingBarChangeListener(this);
 		cancel.setOnClickListener(this);
 		ok.setOnClickListener(this);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case android.R.id.home:
+			setResult(RESULT_CANCELED);
+			finish();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
