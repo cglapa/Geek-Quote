@@ -24,7 +24,7 @@ public class RESTPreferences {
 	public Boolean getRestActivated() {
 		if(RestActivated == null) {
 			if(preferences != null)
-				RestActivated = preferences.getBoolean("rest_activated", true);
+				RestActivated = preferences.getBoolean("rest_activated", false);
 		}
 		return RestActivated;
 	}
