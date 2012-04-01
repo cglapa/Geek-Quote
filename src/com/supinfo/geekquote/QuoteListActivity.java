@@ -3,7 +3,9 @@ package com.supinfo.geekquote;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.supinfo.geekquote.REST.RefreshQuoteREST;
 import com.supinfo.geekquote.adapter.QuoteListAdapter;
+import com.supinfo.geekquote.handler.RefreshQuoteHandler;
 import com.supinfo.geekquote.helper.QuoteSqliteHelper;
 import com.supinfo.geekquote.listener.QuoteListTextviewListener;
 import com.supinfo.geekquote.model.Quote;
@@ -16,6 +18,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +35,26 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 	private QuoteListAdapter quotesAdapter;
 	private QuoteSqliteHelper sql;
 	
-    /** Called when the activity is first created. */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.refresh_button:
+			RefreshQuoteHandler handler = new RefreshQuoteHandler(this, quotesAdapter);
+			RefreshQuoteREST rq = new RefreshQuoteREST(handler, sql, quotesArray);
+			Thread t = new Thread(rq);
+			t.start();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

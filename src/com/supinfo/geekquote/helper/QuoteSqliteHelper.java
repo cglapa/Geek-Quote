@@ -40,6 +40,15 @@ public class QuoteSqliteHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
+	public void insertQuoteRaw(Quote q, SQLiteDatabase db) {
+		ContentValues values = new ContentValues();
+		values.put("id", q.getId());
+		values.put("quote", q.getStrQuote());
+		values.put("rating", q.getRating());
+		values.put("creation_date", DateFormat.format("yyyy-MM-dd kk:mm", q.getCreationDate()).toString());
+		db.insert(TABLE_NAME, null, values);
+	}
+	
 	public long insertQuote(Quote q) {
 		SQLiteDatabase db = getWritableDatabase();
 		long id = insertQuote(q, db);
