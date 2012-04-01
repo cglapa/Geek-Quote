@@ -21,6 +21,7 @@ public class QuoteSqliteHelper extends SQLiteOpenHelper {
 	private static final String TABLE_CREATE = 
 			"CREATE TABLE " + TABLE_NAME + " ( " +
 			"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			"server_id INTEGER UNIQUE, " +
 			"quote TEXT NOT NULL, " +
 			"rating INTEGER NOT NULL, " +
 			"creation_date TEXT NOT NULL);";
@@ -42,7 +43,7 @@ public class QuoteSqliteHelper extends SQLiteOpenHelper {
 	
 	public void insertQuoteRaw(Quote q, SQLiteDatabase db) {
 		ContentValues values = new ContentValues();
-		values.put("id", q.getId());
+		values.put("server_id", q.getServerId());
 		values.put("quote", q.getStrQuote());
 		values.put("rating", q.getRating());
 		values.put("creation_date", DateFormat.format("yyyy-MM-dd kk:mm", q.getCreationDate()).toString());
@@ -82,10 +83,11 @@ public class QuoteSqliteHelper extends SQLiteOpenHelper {
 		Quote q = new Quote();
 		try {
 			q.setId(r.getLong(0));
-    		q.setStrQuote(r.getString(1));
-    		q.setRating(r.getInt(2));
+			q.setServerId(r.getLong(1));
+    		q.setStrQuote(r.getString(2));
+    		q.setRating(r.getInt(3));
     		try {
-				q.setCreationDate(dateFormatter.parse(r.getString(3)));
+				q.setCreationDate(dateFormatter.parse(r.getString(4)));
 			} catch (ParseException e) {
 				e.printStackTrace();
 				q.setCreationDate(Calendar.getInstance().getTime());

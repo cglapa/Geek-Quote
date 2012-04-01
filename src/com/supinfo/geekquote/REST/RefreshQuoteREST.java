@@ -96,7 +96,7 @@ public class RefreshQuoteREST implements Runnable {
 		for(int i = 0;i<nb;i++) {
 			current = json.getJSONObject(i);
 			quote = new Quote();
-			quote.setId(current.getLong("id"));
+			quote.setServerId(current.getLong("id"));
 			quote.setStrQuote(current.getString("strQuote"));
 			quote.setRating(current.getInt("rating"));
 			try {

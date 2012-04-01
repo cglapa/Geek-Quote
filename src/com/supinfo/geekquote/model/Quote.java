@@ -9,6 +9,7 @@ public class Quote implements Serializable {
 	 */
 	private static final long serialVersionUID = -8417515498929205131L;
 	private long id = 0;
+	private long serverId = 0;
 	private String strQuote;
 	private int rating;
 	private Date creationDate;
@@ -19,6 +20,13 @@ public class Quote implements Serializable {
 	public void setId(long id) {
 		if(this.id == 0)
 			this.id = id;
+	}
+	public long getServerId() {
+		return serverId;
+	}
+	public void setServerId(long serverId) {
+		if(this.serverId == 0)
+			this.serverId = serverId;
 	}
 	public String getStrQuote() {
 		return strQuote;
