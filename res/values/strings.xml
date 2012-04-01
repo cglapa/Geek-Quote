@@ -8,6 +8,7 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="refresh">Refresh</string>
+    <string name="add_quote_finished">Quote sent to the server</string>
     <string name="refresh_quote_finished">Refresh successfull</string>
     <string name="refresh_quote_error_timedout">Connection timed out</string>
     <string name="refresh_quote_error_connrefused">Cannot connect to host</string>

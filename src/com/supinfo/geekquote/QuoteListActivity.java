@@ -3,6 +3,7 @@ package com.supinfo.geekquote;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.supinfo.geekquote.REST.AddQuoteREST;
 import com.supinfo.geekquote.REST.RefreshQuoteREST;
 import com.supinfo.geekquote.adapter.QuoteListAdapter;
 import com.supinfo.geekquote.handler.RefreshQuoteHandler;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class QuoteListActivity extends Activity implements View.OnClickListener, TextWatcher {
 	public static final int QUOTE_ACTIVITY_CODE = 1;
@@ -125,6 +127,11 @@ public class QuoteListActivity extends Activity implements View.OnClickListener,
 		quote.setId(sql.insertQuote(quote, db));
     	
     	quotesArray.add(quote);
+    	
+    	Toast toast = Toast.makeText(this, "", 1000);
+    	AddQuoteREST aqr = new AddQuoteREST(quote, sql, toast);
+    	Thread t = new Thread(aqr);
+    	t.start();
     }
 
 	public void onClick(View v) {
